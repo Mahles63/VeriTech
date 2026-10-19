@@ -1,0 +1,69 @@
+
+
+
+body{
+    margin: 0;
+}
+
+header {
+    background: Black;
+    color:  rgb(245, 245, 245);
+    padding: 8px 0px 8px 40px;
+    height: 50px;
+}
+
+Header h1 {
+font-display:inline;
+font-family:'Times New Roman', Times, serif;
+font-weight: 400;
+font-size: 30px;
+float: Left;
+margin-top: 0px;
+margin-right: 10px;
+}
+
+nav ul {
+    font-display: inline;
+    padding: 0px;
+    float: left;
+    }
+
+nav ul li {
+    font-display: inline-block;
+    list-style-type: none;
+    color:  rgb(255, 255, 255);
+    float: left;
+    margin: 16px;
+}
+nav ul li a{
+    color: rgb(152, 252, 59);
+text-decoration: none;
+}
+
+#nav{
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.homelightskyblue{
+    background-color: rgb(126, 245, 239);
+    padding: 40px 10px 10px 10px;
+}
+
+.divider{
+    background-color: rgb(0, 113, 128);
+    height: 5px
+}
+
+.homeblack:hover {
+background-color: rgb(0, 128, 79);
+padding: 40px 10px 10px 10px;
+}
+
+body {
+	background: url('Seasons_digital_art.JPG') no-repeat;
+	background-size: cover;
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	Font-weight: 420;
+	color: rgb(0, 0, 0);
+}
+

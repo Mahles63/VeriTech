@@ -1,0 +1,48 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+"firewall": {
+    "rules": [
+      {
+        "name": "Rate limit /api and /login",
+        "description": "Limit requests to /api and /login to 100 per minute per IP",
+        "conditions": [
+          { "requestPath": ["/api", "/login"] }
+        ],
+        "action": {
+          "type": "rateLimit",
+          "limit": 100,
+          "window": 60,
+          "key": "ip",
+          "denyStatus": 403
+        }
+      },
+      {
+        "name": "Block suspicious IP ranges",
+        "description": "Deny traffic from known malicious IPs or unwanted regions",
+        "conditions": [
+          { "ipRange": ["203.0.113.0/24", "198.51.100.0/24"] }
+        ],
+        "action": {
+          "type": "deny",
+          "status": 403
+        }
+      },
+      {
+        "name": "Require Authorization for API",
+        "description": "Block requests to /api without valid Authorization header",
+        "conditions": [
+          { "requestPath": ["/api"], "headerMissing": "authorization" }
+        ],
+        "action": {
+          "type": "deny",
+          "status": 403
+        }
+      }
+    ]
+  }
+}

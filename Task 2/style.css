@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: "Cormorant Garamond", serif ;color: rgb(214, 36, 134);
+}
+section{
+      min-height:100vh;
+      background-image: url("../Task 2/Mercedes14.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+}
+.container{
+    width: 85%;
+    margin: auto;
+}
+nav{
+    height: 80px;
+}
+nav h1{
+   float: left;
+   line-height: 80px;
+   font-size: 36px;  
+   font-size: inline;
+   color: lightgoldenrodyellow; 
+}
+nav ul{
+    float:right;
+    line-height: 80px;
+}
+nav ul li{
+    display: inline-block;
+    list-style: none;
+    padding: 0px 5px;
+}
+nav ul li a{
+color: #fff;
+text-decoration: none;
+text-transform: uppercase;
+border-radius: 5px;
+padding:7px 8px ; 
+}
+nav ul li a:hover{
+    background-color:crimson ;  
+    transition: 0,8s ease;
+}
+ nav ul li .active{
+    background-color:crimson ;
+ }
+ .article{
+    width: 50%;
+    margin:0px;
+    text-align: center;
+    transform: translateY(26vh);
+ }
+ article h1{
+    font-size: 37px;
+    color:rgb(214, 36, 134);
+    Letter-spacing: 1.5px;
+    font-weight:800;
+    margin-bottom: 50px;
+ }
+ .article .btn{
+    color: #fff;
+    padding: 12px 25px; 
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    background-color: #f15048;
+ }
+ .article .btn:hover{
+    background-color: #4399fa;
+    transition: 0.5 ease;
+ }

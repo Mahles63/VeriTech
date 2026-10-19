@@ -1,0 +1,376 @@
+const movieFiles = import.meta.glob('../Task 4/Movies/*.{jpg,jpeg,png,webp}', {
+  eager: true,
+  import: 'default',
+  query: '?url',
+})
+const seriesFiles = import.meta.glob('../Task 4/Series/*.{jpg,jpeg,png,webp}', {
+  eager: true,
+  import: 'default',
+  query: '?url',
+})
+const carFiles = import.meta.glob('../Task 2/**/*.{jpg,jpeg,png,webp}', {
+  eager: true,
+  import: 'default',
+  query: '?url',
+})
+const seasonFiles = import.meta.glob('../Task 1/Weather Page/*.{JPG,jpeg,jpg,png,webp}', {
+  eager: true,
+  import: 'default',
+  query: '?url',
+})
+
+function createAssetMap(files) {
+  return Object.fromEntries(
+    Object.entries(files).map(([path, url]) => [path.split('/').at(-1), url]),
+  )
+}
+
+export const movieAssets = {
+  ...createAssetMap(movieFiles),
+  ...createAssetMap(seriesFiles),
+}
+export const carAssets = createAssetMap(carFiles)
+export const seasonAssets = createAssetMap(seasonFiles)
+
+const movieCatalog = [
+  {
+    title: 'Venom',
+    image: 'Venom.jpeg',
+    year: '2018',
+    genre: 'Action · Sci-fi',
+    detail: 'A journalist and an alien symbiote strike an uneasy partnership. The result is a darkly funny antihero story with a very large appetite.',
+    imageNote: 'Venom framed against a deep, shadowy blue-black backdrop.',
+    accent: 'from-rose-500/40',
+    featured: true,
+  },
+  {
+    title: 'The Batman',
+    image: 'The Batman.jpg',
+    year: '2022',
+    genre: 'Crime · Drama',
+    detail: 'A young Bruce Wayne follows a trail of riddles through a rain-soaked Gotham in this noir-leaning detective take on the Caped Crusader.',
+    imageNote: 'A stark red-and-black portrait of Gotham’s masked detective.',
+    accent: 'from-red-500/35',
+  },
+  {
+    title: 'Spider-Man',
+    image: 'Spiderman.jpeg',
+    year: '2018',
+    genre: 'Animation · Adventure',
+    detail: 'Brooklyn teenager Miles Morales discovers that being a hero gets complicated when the multiverse opens its doors.',
+    imageNote: 'A close-up of Spider-Man’s red-and-blue suit against darkness.',
+    accent: 'from-blue-500/35',
+  },
+  {
+    title: 'Captain America',
+    image: 'Cap.jpeg',
+    year: '2011',
+    genre: 'Action · Adventure',
+    detail: 'A determined young recruit becomes a symbol of hope when a risky experiment turns him into a super-soldier.',
+    imageNote: 'Captain America’s star-marked suit stands out against an icy backdrop.',
+    accent: 'from-sky-500/35',
+  },
+  {
+    title: 'Captain America: The Winter Soldier',
+    image: 'Captain.jpg',
+    year: '2014',
+    genre: 'Action · Thriller',
+    detail: 'A mission inside a powerful intelligence agency pulls Steve Rogers into a conspiracy that tests his trust and his ideals.',
+    imageNote: 'A dramatic, close-framed Captain America portrait.',
+    accent: 'from-indigo-500/35',
+  },
+  {
+    title: 'Black Widow',
+    image: 'Widow.jpg',
+    year: '2021',
+    genre: 'Action · Thriller',
+    detail: 'Natasha Romanoff confronts the unfinished business of her past and the people who shaped her life before the Avengers.',
+    imageNote: 'A red-haired spy in a black suit, ready to move.',
+    accent: 'from-slate-500/35',
+  },
+  {
+    title: '21 Bridges',
+    image: '21-bridges-movie-poster-3.jpg',
+    year: '2019',
+    genre: 'Crime · Thriller',
+    detail: 'A New York detective races through the night as Manhattan is sealed off during a citywide manhunt.',
+    imageNote: 'A night-time city thriller with the bridges closing in.',
+    accent: 'from-blue-600/35',
+  },
+  {
+    title: 'Iron Man 3',
+    image: 'Iron.jpeg',
+    year: '2013',
+    genre: 'Action · Sci-fi',
+    detail: 'After a devastating attack, Tony Stark has to rely on his ingenuity when the suit is no longer the whole answer.',
+    imageNote: 'Tony Stark in battle-worn armor, lit by the glow of his arc reactor.',
+    accent: 'from-amber-500/35',
+  },
+  {
+    title: 'John Wick',
+    image: 'Keanu.jpeg',
+    year: '2014',
+    genre: 'Action · Thriller',
+    detail: 'A retired hitman is drawn back into a dangerous underworld in a sharply choreographed neo-noir action film.',
+    imageNote: 'Keanu Reeves steps out of the shadows in cool, cinematic blue.',
+    accent: 'from-cyan-500/35',
+  },
+  {
+    title: 'John Wick: Chapter 2',
+    image: 'WIck.jpeg',
+    year: '2017',
+    genre: 'Action · Thriller',
+    detail: 'A blood oath sends the legendary assassin to Rome, where old rules and new enemies collide.',
+    imageNote: 'A rain-dark action portrait of the returning assassin.',
+    accent: 'from-blue-500/35',
+  },
+  {
+    title: 'Justice League',
+    image: 'Justice.jpg',
+    year: '2017',
+    genre: 'Action · Fantasy',
+    detail: 'Batman and Wonder Woman bring together a team of extraordinary heroes to face a threat beyond any one of them.',
+    imageNote: 'An ensemble image featuring the DC superhero team.',
+    accent: 'from-violet-500/35',
+  },
+  {
+    title: 'The Flash',
+    image: 'Flash.webp',
+    year: '2023',
+    genre: 'Action · Sci-fi',
+    detail: 'A time-bending superhero adventure built around speed, alternate timelines, and the consequences of changing the past.',
+    imageNote: 'A vivid red-and-gold speedster portrait.',
+    accent: 'from-red-500/35',
+  },
+  {
+    title: 'Grand Tourismo',
+    image: 'Grand.jpeg',
+    year: '2023',
+    genre: 'Action · Sport',
+    detail: 'Inspired by the true story of a gamer whose racing-simulator skills open the door to professional motorsport.',
+    imageNote: 'Drivers and race cars share the frame in a track-side composition.',
+    accent: 'from-orange-500/35',
+  },
+  {
+    title: 'The Hulk',
+    image: 'Bruce.jpeg',
+    year: '2008',
+    genre: 'Action · Sci-fi',
+    detail: 'Scientist Bruce Banner searches for a cure while the power he cannot control keeps pulling him back into danger.',
+    imageNote: 'The Hulk fills the frame in a vivid wash of green.',
+    accent: 'from-green-500/35',
+  },
+  {
+    title: 'Transformers',
+    image: 'Trans.jpeg',
+    year: '2007',
+    genre: 'Action · Sci-fi',
+    detail: 'A teenager’s first car turns out to be part of an ancient interstellar conflict arriving on Earth.',
+    imageNote: 'A metallic, high-energy clash between giant transforming machines.',
+    accent: 'from-orange-500/35',
+  },
+  {
+    title: 'Thor',
+    image: 'Thor.jpg',
+    year: '2011',
+    genre: 'Action · Fantasy',
+    detail: 'An arrogant Asgardian prince is cast out to Earth and has to learn humility before he can reclaim his place among the gods.',
+    imageNote: 'Thor holds Mjolnir against a blue-toned backdrop.',
+    accent: 'from-blue-500/35',
+  },
+  {
+    title: 'Hulk · character portrait',
+    image: 'Pop.webp',
+    genre: 'Marvel character art',
+    detail: 'A larger-than-life portrait of the gamma-powered hero. This entry describes the supplied character artwork rather than assigning it to a specific film.',
+    imageNote: 'A comic-inspired Hulk portrait in vivid shades of green.',
+    accent: 'from-lime-500/35',
+  },
+  {
+    title: 'The Siege',
+    image: 'Siege.jpeg',
+    year: '2023',
+    genre: 'Action · Thriller',
+    detail: 'A special-forces operative takes on a dangerous mission in a high-stakes action thriller.',
+    imageNote: 'The poster shows a lone fighter above a city under siege.',
+    accent: 'from-amber-500/35',
+  },
+  {
+    title: 'Napoleon',
+    image: 'Napoleon.jpeg',
+    year: '2023',
+    genre: 'Biography · Drama',
+    detail: 'A historical epic follows Napoleon Bonaparte’s rise to power and his turbulent relationship with Josephine.',
+    imageNote: 'Joaquin Phoenix sits in costume as Napoleon in a muted, hand-lettered poster.',
+    accent: 'from-yellow-500/35',
+  },
+  {
+    title: 'Friday',
+    image: 'Friday.jpeg',
+    year: '1995',
+    genre: 'Comedy',
+    detail: 'Two friends spend a long day on their South Central Los Angeles block in this laid-back stoner comedy.',
+    imageNote: 'Craig and Smokey sit side by side on a front porch.',
+    accent: 'from-orange-500/35',
+  },
+  {
+    title: 'AKA',
+    image: 'AkA.jpg',
+    year: '2023',
+    genre: 'Action · Thriller',
+    detail: 'An undercover special-operations agent infiltrates a criminal organization and finds his loyalties tested.',
+    imageNote: 'A close, shadowed portrait from a French action-thriller poster.',
+    accent: 'from-lime-500/35',
+  },
+  {
+    title: 'The screening room',
+    image: 'Cinema.jpeg',
+    genre: 'Movie-night mood',
+    detail: 'The lights dim, the screen comes up, and a good story takes over. This is the collection’s cinematic intermission.',
+    imageNote: 'An empty cinema auditorium seen from the back row.',
+    accent: 'from-funk/35',
+  },
+  {
+    title: 'Gran Turismo · pit lane',
+    image: 'thumb-1920-1319333.jpeg',
+    year: '2023',
+    genre: 'Action · Sport',
+    detail: 'A second look at the racing story inspired by gamer-to-driver Jann Mardenborough.',
+    imageNote: 'Jann Mardenborough and his racing team stand over the car at dusk.',
+    accent: 'from-orange-500/35',
+  },
+  {
+    title: 'Loki · character portrait',
+    image: 'Loki.jpeg',
+    genre: 'Marvel character art',
+    detail: 'A portrait of the Asgardian trickster, whose shifting loyalties and sharp wit make him hard to predict.',
+    imageNote: 'Loki in green and gold fills a dramatic character portrait.',
+    accent: 'from-emerald-500/35',
+  },
+]
+
+const seriesCatalog = [
+  {
+    title: 'Breaking Bad',
+    image: 'Breaking bad.jpeg',
+    year: '2008–2013',
+    genre: 'Crime · Drama',
+    detail: 'A high-school chemistry teacher faces a life-changing diagnosis and makes a dangerous turn into the drug trade.',
+    imageNote: 'Two figures in yellow protective suits stand against a stark monochrome scene.',
+    accent: 'from-yellow-500/35',
+    featured: true,
+  },
+  {
+    title: 'The Blacklist',
+    image: 'Blacklist.jpg',
+    year: '2013–2023',
+    genre: 'Crime · Thriller',
+    detail: 'A notorious fugitive offers to help an FBI task force catch elusive criminals—on one condition.',
+    imageNote: 'A suited Raymond Reddington framed by a digital intelligence-board motif.',
+    accent: 'from-red-500/35',
+  },
+  {
+    title: 'Prison Break',
+    image: 'R.jpeg',
+    year: '2005–2017',
+    genre: 'Crime · Thriller',
+    detail: 'An engineer deliberately lands himself in prison and sets an intricate escape plan in motion to save his brother.',
+    imageNote: 'Two brothers front a poster about a manhunt and an impossible escape.',
+    accent: 'from-slate-500/35',
+  },
+  {
+    title: 'Snowfall',
+    image: 'Snow.jpeg',
+    year: '2017–2023',
+    genre: 'Crime · Drama',
+    detail: 'In 1980s Los Angeles, several lives become entangled as the crack epidemic begins to transform the city.',
+    imageNote: 'A bold, sun-baked portrait against a saturated blue-and-gold backdrop.',
+    accent: 'from-amber-500/35',
+  },
+  {
+    title: 'Hanna',
+    image: 'Hanna.jpg',
+    year: '2019–2021',
+    genre: 'Action · Drama',
+    detail: 'A teenager raised in the wilderness discovers her past is tied to a covert program that will not stop searching for her.',
+    imageNote: 'A young woman and a wolf stand together in a forest.',
+    accent: 'from-emerald-500/35',
+  },
+  {
+    title: 'Shameless',
+    image: 'Shamless.jpeg',
+    year: '2011–2021',
+    genre: 'Comedy · Drama',
+    detail: 'The Gallagher family navigates work, family, and survival with irreverent humor on Chicago’s South Side.',
+    imageNote: 'The Gallagher family tumble through an exuberant ensemble poster.',
+    accent: 'from-lime-500/35',
+  },
+  {
+    title: 'Loki',
+    image: 'Asguard loki.webp',
+    year: '2021–2023',
+    genre: 'Adventure · Fantasy',
+    detail: 'The God of Mischief is pulled into a time-bending mystery that challenges everything he believes about free will.',
+    imageNote: 'A mischievous Asgardian in green and gold fills the portrait.',
+    accent: 'from-emerald-500/35',
+  },
+  {
+    title: 'Suits',
+    image: 'Suits.jpg',
+    year: '2011–2019',
+    genre: 'Drama',
+    detail: 'A sharp young legal mind joins a high-powered New York firm despite having no law degree, building a partnership on nerve and instinct.',
+    imageNote: 'A polished, high-stakes legal-drama ensemble.',
+    accent: 'from-blue-500/35',
+  },
+]
+
+const carCatalog = [
+  { title: 'The AMG silhouette', image: 'Mercedes1.jpeg', make: 'Mercedes-AMG', type: 'Performance coupe', detail: 'A long bonnet, low roofline, and sculpted rear haunches give this red two-door its unmistakable grand-touring stance.', imageNote: 'Red AMG-style coupe at the coast, just before sunset.', year: 'Model year not identified' },
+  { title: 'Blue-hour GT', image: 'Mercedes2.jpeg', make: 'Mercedes-AMG', type: 'Performance coupe', detail: 'The front three-quarter angle brings the vertical-bar grille, long hood, and compact cabin into focus.', imageNote: 'Blue sports coupe set against a mountain range.', year: 'Model year not identified' },
+  { title: 'Golden-hour grand tourer', image: 'Mercedes3.jpeg', make: 'Mercedes-AMG', type: 'Performance coupe', detail: 'Warm reflections emphasize the fastback roof, broad shoulders, and road-focused proportions.', imageNote: 'Red coupe on an open shoreline beneath an amber sky.', year: 'Model year not identified' },
+  { title: 'Track-day profile', image: 'Mercedes4.jpeg', make: 'Mercedes-AMG', type: 'Track-inspired coupe', detail: 'A prominent rear wing, wide tires, and sculpted side vents point to a track-oriented interpretation of the GT shape.', imageNote: 'Silver performance coupe on a closed circuit.', year: 'Model year not identified' },
+  { title: 'Gullwing moment', image: 'Mercedes6.jpeg', make: 'Mercedes-Benz', type: 'Gullwing coupe', detail: 'The upward-opening doors are the defining detail of this dramatic, low-slung two-seat coupe.', imageNote: 'Yellow gullwing-door sports car displayed with both doors raised.', year: 'Model year not identified' },
+  { title: 'The rear view', image: 'Mercedes7.jpeg', make: 'Mercedes-AMG', type: 'Track-inspired coupe', detail: 'A wide rear wing, full-width tail lighting, and large diffuser make the planted rear design the star of this frame.', imageNote: 'Silver track coupe photographed from behind.', year: 'Model year not identified' },
+  { title: 'Silver performance study', image: 'Mercedes8.jpeg', make: 'Mercedes-AMG', type: 'Performance coupe', detail: 'A clean, low profile and muscular wheel arches balance polished grand-touring shape with performance intent.', imageNote: 'Silver coupe in a rear three-quarter view.', year: 'Model year not identified' },
+  { title: 'AMG at dusk', image: 'Mercedes9.jpg', make: 'Mercedes-AMG', type: 'Performance coupe', detail: 'The low front stance and Panamericana-style grille anchor a dramatic mountain-road composition.', imageNote: 'Dark green coupe against a moody sunset landscape.', year: 'Model year not identified' },
+  { title: 'Modern four-door', image: 'Mercedes10.jpeg', make: 'Mercedes-AMG', type: 'Sport sedan', detail: 'Four doors meet a low, athletic roofline. The upright grille and sculpted front bumper give this sedan a track-inspired look.', imageNote: 'Grey performance sedan parked beside a green hillside.', year: 'Model year not identified' },
+  { title: 'Silver road companion', image: 'Mercedes11.jpeg', make: 'Mercedes-AMG', type: 'Performance coupe', detail: 'A side-biased view highlights the long wheelbase, compact glasshouse, and balanced two-door proportions.', imageNote: 'Silver Mercedes-badged coupe in an open landscape.', year: 'Model year not identified' },
+  { title: 'Sunset on the coast', image: 'Mercedes12.jpg', make: 'Mercedes-AMG', type: 'Performance coupe', detail: 'A warm sunset picks out the front grille and sharply creased bodywork of this seaside GT.', imageNote: 'Red coupe on a coastal road at golden hour.', year: 'Model year not identified' },
+  { title: 'The scenic route', image: 'Mercedes13.jpg', make: 'Mercedes-AMG', type: 'Performance coupe', detail: 'A bright yellow finish and dramatic architectural setting turn this rear view into a design study.', imageNote: 'Yellow coupe beside a modern mountain home.', year: 'Model year not identified' },
+  { title: 'AMG from behind', image: 'Mercedes14.jpg', make: 'Mercedes-AMG', type: 'GT coupe', detail: 'A broad rear track, quad exhaust outlets, and a high-mounted wing give the tail its unmistakably purposeful look.', imageNote: 'Silver AMG GT seen from the rear on an open test surface.', year: 'Model year not identified' },
+]
+
+const seasonCatalog = [
+  { title: 'Spring, in bloom', image: 'Seasons.jpg', season: 'Spring', detail: 'A four-panel garden study traces the shift from bare branches through blossom and fresh green leaves.', imageNote: 'Four garden scenes show flowering trees and a snow-covered final panel.', palette: 'Blossom · Fresh green', icon: 'sunrise' },
+  { title: 'Summer by the lake', image: 'Summer.jpeg', season: 'Summer', detail: 'Late sunlight washes over open grass and a still lake, making this landscape feel unhurried and wide open.', imageNote: 'A sunlit hillside and lake beneath a blue summer sky.', palette: 'Golden light · Open water', icon: 'sun' },
+  { title: 'Autumn reflections', image: 'Spri.jpeg', season: 'Autumn', detail: 'Bright red and gold foliage is mirrored in a quiet lake beneath a wooded ridgeline.', imageNote: 'Red and orange fall trees reflected in mountain water.', palette: 'Amber · Crimson', icon: 'leaf' },
+  { title: 'The fall road', image: 'Autumn.JPG', season: 'Autumn', detail: 'A winding country road disappears under a canopy of copper leaves, inviting a slower drive.', imageNote: 'An empty road curls through a dense forest in autumn.', palette: 'Copper · Moss', icon: 'leaf' },
+  { title: 'A year in one frame', image: 'Seasons_digital_art.jpg', season: 'All seasons', detail: 'A split landscape moves from spring and summer into autumn and snow, making the contrast between seasons the subject.', imageNote: 'A tree and field shift from green to red, gold, and winter blue.', palette: 'Four-season contrast', icon: 'sparkles' },
+  { title: 'Still winter', image: 'Icey Winter.JPG', season: 'Winter', detail: 'Snow-covered peaks and a quiet alpine village make a study in cold light and mountain scale.', imageNote: 'Snowy mountains rise behind a small alpine settlement.', palette: 'Ice blue · Snow', icon: 'snowflake' },
+  { title: 'Winter in the city', image: 'Snow.jpeg', season: 'Winter', detail: 'A frozen city park turns into an open-air skating scene beneath a skyline of winter trees.', imageNote: 'Skaters cross a snowy rink in a city park.', palette: 'Snow white · City blue', icon: 'snowflake' },
+  { title: 'Above the tree line', image: 'Snow_at_Wollman_Rink.0.jpeg', season: 'Winter', detail: 'A high mountain view looks across a broad snowfield toward a sharp alpine ridgeline.', imageNote: 'Sunlight falls across snowy peaks and a mountain village.', palette: 'Glacier white · Sky blue', icon: 'snowflake' },
+  { title: 'Autumn trail', image: 'No Mans Land.JPG', season: 'Autumn', detail: 'A quiet track cuts between tall trees as late-season leaves shift toward gold and deep orange.', imageNote: 'A winding path sits under a rich canopy of fall foliage.', palette: 'Burnt orange · Forest green', icon: 'leaf' },
+]
+
+function withIds(items, type) {
+  return items.map((item) => ({
+    ...item,
+    id: `${type}-${item.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
+    type,
+  }))
+}
+
+export const movies = withIds(movieCatalog, 'movie')
+export const series = withIds(seriesCatalog, 'series')
+export const cars = carCatalog.map((car) => ({
+  ...car,
+  id: `car-${car.image.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
+  typeName: car.type,
+  type: 'car',
+}))
+export const seasons = seasonCatalog.map((season) => ({
+  ...season,
+  id: `season-${season.image.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
+  type: 'season',
+}))

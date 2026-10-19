@@ -1,0 +1,45 @@
+}
+.Wrapper{
+width: 100px;
+background:cyan;
+Margin: 0 Auto 0 Auto;
+}
+
+
+.Heading{
+    height: 100px;
+    color: blue;
+    padding: 22px;
+    text-align: center;
+}
+
+.Navigation{
+    height: 50px;
+    background: lightskyblue;
+    text-align: center;
+}
+
+.Content{
+    min-height: 400px;
+    background: burlywood;
+    width: 400px;
+    Float: left;
+
+}
+
+.Sidebar{
+    width:200px;
+    min-height: 400px;
+    Float: Right;
+    background:lightcyan
+     
+}
+
+.Footer{
+    clear: both;
+     background: blue ;
+     height: 40px;
+     color: aqua;
+     text-align: center;
+     padding: 10px; 
+}
