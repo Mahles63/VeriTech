@@ -1,6 +1,8 @@
-# Discoveries
+# VeriTech Projects
 
-Discoveries is a responsive editorial archive for four image collections: series, movies, performance cars, and seasonal photography. A single Discoveries menu opens each collection, with a “Surprise me” shortcut for an unexpected pick. Cards include image-specific notes and context; opening an entry brings up an accessible image viewer with previous/next navigation. Visitors can search each collection and keep a cross-collection favorites list in local storage.
+The home page showcases four VeriTech assignments, each linked to its own standalone project page: a seasonal photography site, a classic cars site, a to-do app, and a movie landing page. MovieFunk is available at `/moviefunk` (and the previous `/discoveries` address remains supported).
+
+MovieFunk is a responsive editorial archive for four image collections: series, movies, performance cars, and seasonal photography. The MovieFunk menu opens each collection, with a “Surprise me” shortcut for an unexpected pick. Cards include image-specific notes and context; opening an entry brings up an accessible image viewer with previous/next navigation. Visitors can search each collection and keep a cross-collection favorites list in local storage.
 
 The site is owned by [Mahles63](https://github.com/Mahles63), with the project source at [github.com/Mahles63/VeriTech](https://github.com/Mahles63/VeriTech).
 
@@ -22,7 +24,7 @@ npm run build
 npm run preview
 ```
 
-The production site is generated in `dist/`.
+The production site and standalone assignment entry pages are generated in `dist/`.
 
 ## Deploy to Vercel
 
@@ -33,4 +35,4 @@ Import the repository and use the default Vite configuration:
 
 `vercel.json` includes a rewrite for direct visits and page refreshes.
 
-Discoveries is a showcase, not a streaming or commerce service. It does not stream films, sell vehicles, or collect account information; favorites are stored only in the visitor’s browser.
+MovieFunk is a showcase, not a streaming or commerce service. It does not stream films, sell vehicles, or collect account information; favorites are stored only in the visitor’s browser.
