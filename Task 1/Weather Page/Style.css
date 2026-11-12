@@ -1,69 +1,829 @@
-
-
-
-body{
-    margin: 0;
+:root {
+  color-scheme: light;
+  --paper: #f5f2eb;
+  --ink: #24281f;
+  --muted: #6b7064;
+  --line: rgba(36, 40, 31, 0.13);
+  --accent: #52714c;
+  --accent-dark: #29432c;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', 'Segoe UI', sans-serif;
 }
 
-header {
-    background: Black;
-    color:  rgb(245, 245, 245);
-    padding: 8px 0px 8px 40px;
-    height: 50px;
+* {
+  box-sizing: border-box;
 }
 
-Header h1 {
-font-display:inline;
-font-family:'Times New Roman', Times, serif;
-font-weight: 400;
-font-size: 30px;
-float: Left;
-margin-top: 0px;
-margin-right: 10px;
-}
-
-nav ul {
-    font-display: inline;
-    padding: 0px;
-    float: left;
-    }
-
-nav ul li {
-    font-display: inline-block;
-    list-style-type: none;
-    color:  rgb(255, 255, 255);
-    float: left;
-    margin: 16px;
-}
-nav ul li a{
-    color: rgb(152, 252, 59);
-text-decoration: none;
-}
-
-#nav{
-    font-family: 'Times New Roman', Times, serif;
-}
-
-.homelightskyblue{
-    background-color: rgb(126, 245, 239);
-    padding: 40px 10px 10px 10px;
-}
-
-.divider{
-    background-color: rgb(0, 113, 128);
-    height: 5px
-}
-
-.homeblack:hover {
-background-color: rgb(0, 128, 79);
-padding: 40px 10px 10px 10px;
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-	background: url('Seasons_digital_art.JPG') no-repeat;
-	background-size: cover;
-	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-	Font-weight: 420;
-	color: rgb(0, 0, 0);
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
 }
 
+a {
+  color: inherit;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.site-header {
+  position: relative;
+  z-index: 2;
+  border-bottom: 1px solid var(--line);
+  background: rgba(245, 242, 235, 0.94);
+}
+
+.nav-shell {
+  display: flex;
+  width: min(1200px, calc(100% - 48px));
+  min-height: 76px;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  text-decoration: none;
+}
+
+.brand-mark {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent-dark);
+  color: #f7f3e8;
+  font-family: var(--serif);
+  font-size: 19px;
+  font-style: italic;
+}
+
+.brand-name {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.brand-caption {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(12px, 2.2vw, 29px);
+}
+
+.site-nav a {
+  color: #555b50;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current='page'] {
+  color: var(--accent-dark);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.19em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  width: 24px;
+  height: 1px;
+  background: currentColor;
+  content: '';
+}
+
+.home-main,
+.season-main,
+.about-main {
+  width: min(1200px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.home-hero {
+  display: grid;
+  min-height: 590px;
+  padding: 66px 0 64px;
+  align-items: center;
+  gap: clamp(34px, 7vw, 94px);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-copy h1,
+.season-copy h1,
+.about-hero h1 {
+  margin: 20px 0 0;
+  font-family: var(--serif);
+  font-size: clamp(3.2rem, 7.1vw, 6.2rem);
+  font-weight: 500;
+  letter-spacing: -0.075em;
+  line-height: 0.98;
+}
+
+.hero-copy h1 em,
+.season-copy h1 em,
+.about-hero h1 em {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.hero-description {
+  max-width: 430px;
+  margin: 23px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 29px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--accent);
+  color: var(--accent-dark);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.text-link span {
+  font-size: 18px;
+  transition: transform 160ms ease;
+}
+
+.text-link:hover span {
+  transform: translateX(4px);
+}
+
+.hero-art {
+  position: relative;
+  min-height: 450px;
+  overflow: hidden;
+  border-radius: 48% 48% 9px 9px;
+  background-color: #7d8b72;
+  background-image: linear-gradient(180deg, transparent 56%, rgba(19, 34, 24, 0.48)), url('Seasons_digital_art.jpg');
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 24px 60px rgba(37, 47, 32, 0.14);
+}
+
+.hero-art-label {
+  position: absolute;
+  right: 24px;
+  bottom: 23px;
+  left: 24px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  color: white;
+}
+
+.hero-art-label strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 23px;
+  font-weight: 500;
+}
+
+.hero-art-label span {
+  display: block;
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hero-index {
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 99px;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+
+.season-section {
+  padding: 57px 0 92px;
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 24px;
+}
+
+.section-heading {
+  display: flex;
+  margin-bottom: 27px;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.section-heading h2 {
+  margin: 11px 0 0;
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+}
+
+.section-heading > p {
+  max-width: 330px;
+  margin: 0 0 4px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.season-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.season-card {
+  display: flex;
+  min-width: 0;
+  overflow: hidden;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fbfaf6;
+  text-decoration: none;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.season-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 34px rgba(36, 40, 31, 0.12);
+}
+
+.season-card-image {
+  position: relative;
+  aspect-ratio: 1.12;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+}
+
+.season-card-image::after {
+  position: absolute;
+  inset: 45% 0 0;
+  background: linear-gradient(transparent, rgba(20, 27, 21, 0.38));
+  content: '';
+}
+
+.season-card-image--spring {
+  background-image: url('Seasons.jpg');
+  background-position: left bottom;
+  background-size: 200% 200%;
+}
+
+.season-card-image--summer {
+  background-image: url('Summer.jpeg');
+}
+
+.season-card-image--autumn {
+  background-image: url('Autumn.JPG');
+}
+
+.season-card-image--winter {
+  background-image: url('No Mans Land.JPG');
+}
+
+.season-number {
+  position: absolute;
+  z-index: 1;
+  top: 14px;
+  left: 15px;
+  color: white;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+}
+
+.season-card-copy {
+  display: flex;
+  padding: 17px 17px 19px;
+  flex: 1;
+  flex-direction: column;
+}
+
+.season-card-copy h3 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 23px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+
+.season-card-copy p {
+  margin: 8px 0 17px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.card-link {
+  display: inline-flex;
+  margin-top: auto;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent-dark);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.year-note {
+  display: grid;
+  padding: 27px 30px;
+  align-items: center;
+  gap: 22px;
+  border-radius: 7px;
+  background: #e8e8dc;
+  grid-template-columns: auto 1fr auto;
+}
+
+.year-note-mark {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid rgba(41, 67, 44, 0.3);
+  border-radius: 50%;
+  color: var(--accent-dark);
+  font-family: var(--serif);
+  font-size: 22px;
+}
+
+.year-note h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.year-note p {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.year-note a {
+  color: var(--accent-dark);
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.season-page {
+  --accent: #52714c;
+  --accent-dark: #29432c;
+}
+
+.season-page[data-season='spring'] {
+  --accent: #668358;
+  --accent-dark: #3d5b3e;
+}
+
+.season-page[data-season='summer'] {
+  --accent: #a06d32;
+  --accent-dark: #70491e;
+}
+
+.season-page[data-season='autumn'] {
+  --accent: #b26432;
+  --accent-dark: #784122;
+}
+
+.season-page[data-season='winter'] {
+  --accent: #52768a;
+  --accent-dark: #315466;
+}
+
+.season-hero {
+  display: grid;
+  min-height: 510px;
+  padding: 56px 0 60px;
+  align-items: center;
+  gap: clamp(34px, 7vw, 90px);
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+}
+
+.season-copy h1 {
+  font-size: clamp(3.2rem, 6vw, 5.4rem);
+}
+
+.season-copy .eyebrow {
+  letter-spacing: 0.16em;
+}
+
+.season-copy .hero-description {
+  margin-top: 19px;
+}
+
+.season-visual {
+  position: relative;
+  min-height: 390px;
+  overflow: hidden;
+  border-radius: 7px 100px 7px 7px;
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 22px 52px rgba(37, 47, 32, 0.15);
+}
+
+.season-visual::after {
+  position: absolute;
+  inset: 40% 0 0;
+  background: linear-gradient(transparent, rgba(20, 27, 21, 0.48));
+  content: '';
+}
+
+.season-visual--spring {
+  background-image: url('Seasons.jpg');
+  background-position: left bottom;
+  background-size: 200% 200%;
+}
+
+.season-visual--summer {
+  background-image: url('Summer.jpeg');
+}
+
+.season-visual--autumn {
+  background-image: url('Autumn.JPG');
+}
+
+.season-visual--winter {
+  background-image: url('No Mans Land.JPG');
+}
+
+.visual-caption {
+  position: absolute;
+  z-index: 1;
+  right: 22px;
+  bottom: 21px;
+  left: 22px;
+  color: white;
+  font-family: var(--serif);
+  font-size: 20px;
+}
+
+.season-details {
+  display: grid;
+  padding: 31px 0 84px;
+  border-top: 1px solid var(--line);
+  gap: 24px;
+  grid-template-columns: minmax(0, 1.1fr) repeat(3, minmax(0, 0.7fr));
+}
+
+.season-details-intro h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: -0.045em;
+}
+
+.season-details-intro p,
+.detail-item p {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.detail-item {
+  padding-left: 18px;
+  border-left: 1px solid var(--line);
+}
+
+.detail-item span {
+  color: var(--accent);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.detail-item h3 {
+  margin: 8px 0 0;
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.season-next {
+  display: flex;
+  margin-bottom: 66px;
+  padding: 22px 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.season-next span {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.season-next a {
+  color: var(--accent-dark);
+  font-family: var(--serif);
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.about-hero {
+  padding: 86px 0 57px;
+}
+
+.about-hero h1 {
+  max-width: 850px;
+  font-size: clamp(3.1rem, 7vw, 6rem);
+}
+
+.about-hero .hero-description {
+  max-width: 660px;
+}
+
+.about-gallery {
+  display: grid;
+  margin-bottom: 76px;
+  gap: 16px;
+  grid-template-columns: 1.4fr 1fr 1fr;
+}
+
+.about-gallery div {
+  min-height: 230px;
+  border-radius: 6px;
+  background-position: center;
+  background-size: cover;
+}
+
+.about-gallery div:first-child {
+  background-image: url('Autumn.JPG');
+}
+
+.about-gallery div:nth-child(2) {
+  background-image: url('Summer.jpeg');
+}
+
+.about-gallery div:nth-child(3) {
+  background-image: url('No Mans Land.JPG');
+}
+
+.site-footer {
+  border-top: 1px solid var(--line);
+}
+
+.footer-shell {
+  display: flex;
+  width: min(1200px, calc(100% - 48px));
+  min-height: 72px;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.footer-shell a {
+  color: var(--accent-dark);
+  text-decoration: none;
+}
+
+@media (max-width: 820px) {
+  .home-hero,
+  .season-hero {
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .hero-art {
+    min-height: 370px;
+  }
+
+  .season-visual {
+    min-height: 330px;
+  }
+
+  .season-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .season-details {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .season-details-intro {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 580px) {
+  .nav-shell,
+  .home-main,
+  .season-main,
+  .about-main,
+  .footer-shell {
+    width: min(100% - 36px, 480px);
+  }
+
+  .nav-shell {
+    min-height: 68px;
+    flex-wrap: wrap;
+    padding: 12px 0;
+    gap: 12px;
+  }
+
+  .site-nav {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .site-nav a {
+    font-size: 10px;
+  }
+
+  .home-hero,
+  .season-hero {
+    padding: 47px 0 46px;
+    gap: 30px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-copy h1,
+  .season-copy h1 {
+    font-size: clamp(3.05rem, 14vw, 4.7rem);
+  }
+
+  .hero-art {
+    min-height: 330px;
+    border-radius: 42% 42% 7px 7px;
+  }
+
+  .season-visual {
+    min-height: 300px;
+    border-top-right-radius: 74px;
+  }
+
+  .season-section {
+    padding: 43px 0 58px;
+  }
+
+  .section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .section-heading > p {
+    max-width: 400px;
+  }
+
+  .season-grid {
+    gap: 12px;
+  }
+
+  .season-card-image {
+    aspect-ratio: 0.95;
+  }
+
+  .season-card-copy {
+    padding: 13px 12px 15px;
+  }
+
+  .season-card-copy h3 {
+    font-size: 20px;
+  }
+
+  .season-card-copy p {
+    font-size: 10px;
+  }
+
+  .year-note {
+    padding: 20px;
+    align-items: start;
+    gap: 14px;
+    grid-template-columns: auto 1fr;
+  }
+
+  .year-note a {
+    grid-column: 2;
+  }
+
+  .season-details {
+    padding: 25px 0 58px;
+    gap: 20px 14px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .season-details-intro {
+    grid-column: 1 / -1;
+  }
+
+  .detail-item {
+    padding-left: 12px;
+  }
+
+  .season-next a {
+    font-size: 17px;
+  }
+
+  .about-hero {
+    padding: 60px 0 40px;
+  }
+
+  .about-hero h1 {
+    font-size: clamp(3.1rem, 14vw, 4.7rem);
+  }
+
+  .about-gallery {
+    margin-bottom: 52px;
+    gap: 9px;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .about-gallery div {
+    min-height: 150px;
+  }
+
+  .about-gallery div:first-child {
+    min-height: 190px;
+    grid-column: 1 / -1;
+  }
+
+  .footer-shell {
+    min-height: 66px;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-copy h1,
+  .season-copy h1,
+  .about-hero h1 {
+    font-size: clamp(2.15rem, 12vw, 3rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
