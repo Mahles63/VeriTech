@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
+import ProjectHome from './ProjectHome.jsx'
 import {
   ArrowDown,
   ArrowRight,
@@ -86,12 +87,13 @@ const datasets = { movies, series, cars, seasons }
 function sectionFromPath(pathname) {
   const route = pathname.split('/').filter(Boolean).at(-1)
   if (route === 'my-list') return 'saved'
-  if (route === 'discoveries' || !route) return 'movies'
+  if (route === 'discoveries' || route === 'moviefunk' || !route) return 'movies'
   return sections.some((section) => section.id === route) ? route : 'movies'
 }
 
 function pathForSection(section) {
-  return section === 'saved' ? '/my-list' : `/${section}`
+  if (section === 'saved') return '/my-list'
+  return section === 'movies' ? '/moviefunk' : `/${section}`
 }
 
 function getImage(item) {
@@ -101,13 +103,13 @@ function getImage(item) {
 
 function Logo({ onHome }) {
   return (
-    <button type="button" onClick={onHome} className="brand-lockup group flex items-center gap-3 text-left" aria-label="Discoveries home">
+    <button type="button" onClick={onHome} className="brand-lockup group flex items-center gap-3 text-left" aria-label="MovieFunk home">
       <span className="brand-seal grid size-10 shrink-0 place-items-center" aria-hidden="true">
-        <span>D</span><span className="brand-seal-dot" />
+        <span>M</span><span className="brand-seal-dot" />
       </span>
       <span className="flex flex-col">
-        <span className="brand-wordmark">Discoveries</span>
-        <span className="brand-caption">A considered collection</span>
+        <span className="brand-wordmark">MovieFunk</span>
+        <span className="brand-caption">Stories worth revisiting</span>
       </span>
     </button>
   )
@@ -115,10 +117,10 @@ function Logo({ onHome }) {
 
 function Header({ active, onNavigate, search, setSearch, savedCount }) {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [discoveryOpen, setDiscoveryOpen] = useState(false)
+  const [movieFunkOpen, setMovieFunkOpen] = useState(false)
 
   useEffect(() => {
-    if (!menuOpen && !discoveryOpen) return undefined
+    if (!menuOpen && !movieFunkOpen) return undefined
     const closeMenus = (event) => {
       if (event.key === 'Escape') {
         setMenuOpen(false)
@@ -127,12 +129,12 @@ function Header({ active, onNavigate, search, setSearch, savedCount }) {
     }
     window.addEventListener('keydown', closeMenus)
     return () => window.removeEventListener('keydown', closeMenus)
-  }, [menuOpen, discoveryOpen])
+  }, [menuOpen, movieFunkOpen])
 
   const chooseSection = (section) => {
     onNavigate(section)
     setMenuOpen(false)
-    setDiscoveryOpen(false)
+    setMovieFunkOpen(false)
     setSearch('')
   }
 
@@ -146,15 +148,15 @@ function Header({ active, onNavigate, search, setSearch, savedCount }) {
     <header className="site-header sticky top-0 z-40 border-b border-white/[0.07] bg-[#11100d]/90 backdrop-blur-2xl">
       <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-3 px-4 py-3 sm:px-7 lg:px-10">
         <Logo onHome={() => chooseSection('movies')} />
-        <nav aria-label="Discoveries navigation" className="hidden items-center gap-1 md:flex">
+        <nav aria-label="MovieFunk navigation" className="hidden items-center gap-1 md:flex">
           <div className="relative">
-            <button type="button" onClick={() => setDiscoveryOpen(!discoveryOpen)} aria-expanded={discoveryOpen} aria-controls="discovery-menu-desktop" className={`nav-tab inline-flex items-center gap-2 rounded-xl px-3 py-2.5 text-[13px] transition ${sections.some((section) => section.id === active) ? 'active bg-white/[0.08] text-white' : 'text-white/52 hover:bg-white/[0.045] hover:text-white'}`}>
-              <Compass size={15} strokeWidth={1.8} /> Discoveries <ChevronRight size={13} className={`transition-transform ${discoveryOpen ? 'rotate-90' : ''}`} />
+            <button type="button" onClick={() => setMovieFunkOpen(!movieFunkOpen)} aria-expanded={movieFunkOpen} aria-controls="moviefunk-menu-desktop" className={`nav-tab inline-flex items-center gap-2 rounded-xl px-3 py-2.5 text-[13px] transition ${sections.some((section) => section.id === active) ? 'active bg-white/[0.08] text-white' : 'text-white/52 hover:bg-white/[0.045] hover:text-white'}`}>
+              <Compass size={15} strokeWidth={1.8} /> MovieFunk <ChevronRight size={13} className={`transition-transform ${movieFunkOpen ? 'rotate-90' : ''}`} />
             </button>
-            {discoveryOpen && (
+            {movieFunkOpen && (
               <>
-                <button type="button" aria-label="Close Discoveries menu" onClick={() => setDiscoveryOpen(false)} className="fixed inset-0 z-10 cursor-default" />
-                <div id="discovery-menu-desktop" className="absolute left-0 top-full z-20 mt-2 min-w-48 rounded-2xl border border-white/10 bg-[#1b1914] p-2 shadow-2xl shadow-black/50">
+                <button type="button" aria-label="Close MovieFunk menu" onClick={() => setMovieFunkOpen(false)} className="fixed inset-0 z-10 cursor-default" />
+                <div id="moviefunk-menu-desktop" className="absolute left-0 top-full z-20 mt-2 min-w-48 rounded-2xl border border-white/10 bg-[#1b1914] p-2 shadow-2xl shadow-black/50">
                   {sections.map(({ id, label, icon: Icon }) => (
                     <button key={id} type="button" onClick={() => chooseSection(id)} aria-current={active === id ? 'page' : undefined} className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-[13px] transition ${active === id ? 'bg-funk/15 text-white' : 'text-white/65 hover:bg-white/[0.06] hover:text-white'}`}>
                       <Icon size={15} strokeWidth={1.8} /> {label}
@@ -179,12 +181,12 @@ function Header({ active, onNavigate, search, setSearch, savedCount }) {
           {search && <button type="button" onClick={() => setSearch('')} aria-label="Clear search"><X size={14} /></button>}
         </div>
         <a href={githubRepo} target="_blank" rel="noreferrer" className="hidden items-center gap-2 rounded-xl border border-white/10 px-3 py-2 text-xs text-white/70 transition hover:border-funk/50 hover:text-white xl:flex"><Github size={15} /> GitHub <ArrowUpRight size={12} className="text-white/35" /></a>
-        <button type="button" className="rounded-xl border border-white/10 bg-white/[0.04] p-2 text-white md:hidden" onClick={() => { setMenuOpen(!menuOpen); setDiscoveryOpen(false) }} aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={menuOpen}>{menuOpen ? <X size={18} /> : <Menu size={18} />}</button>
+        <button type="button" className="rounded-xl border border-white/10 bg-white/[0.04] p-2 text-white md:hidden" onClick={() => { setMenuOpen(!menuOpen); setMovieFunkOpen(false) }} aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={menuOpen}>{menuOpen ? <X size={18} /> : <Menu size={18} />}</button>
       </div>
       {menuOpen && (
-        <nav aria-label="Mobile Discoveries navigation" className="absolute inset-x-0 top-full border-b border-white/10 bg-[#171611]/[0.98] p-3 shadow-2xl backdrop-blur-2xl md:hidden">
-          <button type="button" onClick={() => setDiscoveryOpen(!discoveryOpen)} aria-expanded={discoveryOpen} aria-controls="discovery-menu-mobile" className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm ${sections.some((section) => section.id === active) ? 'bg-white/[0.08] text-white' : 'text-white/60'}`}><Compass size={16} /> Discoveries <ChevronRight size={14} className={`ml-auto transition-transform ${discoveryOpen ? 'rotate-90' : ''}`} /></button>
-          {discoveryOpen && <div id="discovery-menu-mobile" className="mb-2 ml-4 border-l border-white/10 pl-2">{sections.map(({ id, label, icon: Icon }) => (
+        <nav aria-label="Mobile MovieFunk navigation" className="absolute inset-x-0 top-full border-b border-white/10 bg-[#171611]/[0.98] p-3 shadow-2xl backdrop-blur-2xl md:hidden">
+          <button type="button" onClick={() => setMovieFunkOpen(!movieFunkOpen)} aria-expanded={movieFunkOpen} aria-controls="moviefunk-menu-mobile" className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm ${sections.some((section) => section.id === active) ? 'bg-white/[0.08] text-white' : 'text-white/60'}`}><Compass size={16} /> MovieFunk <ChevronRight size={14} className={`ml-auto transition-transform ${movieFunkOpen ? 'rotate-90' : ''}`} /></button>
+          {movieFunkOpen && <div id="moviefunk-menu-mobile" className="mb-2 ml-4 border-l border-white/10 pl-2">{sections.map(({ id, label, icon: Icon }) => (
             <button key={id} type="button" onClick={() => chooseSection(id)} aria-current={active === id ? 'page' : undefined} className={`flex w-full items-center gap-3 rounded-xl px-4 py-2.5 text-left text-sm ${active === id ? 'text-white' : 'text-white/50 hover:text-white'}`}><Icon size={15} /> {label}{active === id && <span className="ml-auto size-1.5 rounded-full bg-funk" />}</button>
           ))}<button type="button" onClick={surpriseMe} className="flex w-full items-center gap-3 rounded-xl px-4 py-2.5 text-left text-sm text-white/50 hover:text-white"><Shuffle size={15} /> Surprise me</button></div>}
           <button type="button" onClick={() => chooseSection('saved')} aria-current={active === 'saved' ? 'page' : undefined} className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm ${active === 'saved' ? 'bg-white/[0.08] text-white' : 'text-white/60'}`}><Bookmark size={16} /> My list{savedCount > 0 && <span className="ml-auto text-funk">{savedCount}</span>}</button>
@@ -277,7 +279,7 @@ function CollectionHero({ section, onExplore, savedCount, items }) {
               <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-black/45 px-2.5 py-1.5 text-[9px] font-bold uppercase tracking-[0.17em] text-white/85 backdrop-blur-md"><span className="hero-stat-dot" aria-hidden="true" /> From the collection · {slide.type === 'car' ? 'Cars' : slide.type === 'season' ? 'Seasons' : slide.type === 'series' ? 'Series' : 'Movies'}</span>
               <button type="button" onClick={() => onExplore(section, slide)} className="absolute inset-x-0 bottom-16 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-funk focus-visible:outline-offset-[-5px]" aria-label={`Open details for ${slide.title}`}>
                 <span className="block px-5 pb-2 pt-12">
-                  <span className="mb-1 block text-[10px] uppercase tracking-[0.18em] text-white/55">{slide.genre ?? slide.season ?? slide.typeName ?? slide.make ?? 'A Discoveries pick'}</span>
+                  <span className="mb-1 block text-[10px] uppercase tracking-[0.18em] text-white/55">{slide.genre ?? slide.season ?? slide.typeName ?? slide.make ?? 'A MovieFunk pick'}</span>
                   <span className="block text-xl font-bold tracking-[-0.045em] text-white">{slide.title}</span>
                 </span>
               </button>
@@ -401,7 +403,7 @@ function DetailDialog({ item, items, saved, onSave, onClose, onNavigate }) {
             <p className="text-xs leading-6 text-white/65">{item.imageNote}</p>
           </div>
           {item.type === 'car' && <p className="mt-4 flex items-start gap-2 text-[10px] leading-5 text-white/35"><Gauge size={13} className="mt-0.5 shrink-0 text-funk/70" /> Model year and trim are intentionally not stated where the supplied photograph does not verify them.</p>}
-          {item.type !== 'car' && <p className="mt-4 flex items-start gap-2 text-[10px] leading-5 text-white/35"><Film size={13} className="mt-0.5 shrink-0 text-funk/70" /> Discoveries is a collection, not a streaming service. This title is not shown here.</p>}
+          {item.type !== 'car' && <p className="mt-4 flex items-start gap-2 text-[10px] leading-5 text-white/35"><Film size={13} className="mt-0.5 shrink-0 text-funk/70" /> MovieFunk is a collection, not a streaming service. This title is not shown here.</p>}
           <div className="mt-7 flex flex-wrap gap-2.5">
             <button type="button" onClick={() => onSave(item.id)} className={`inline-flex items-center gap-2 rounded-xl px-4 py-3 text-xs font-bold transition ${saved ? 'bg-white/[0.09] text-white' : 'bg-funk text-white hover:bg-[#d0a36b]'}`}><Heart size={14} className={saved ? 'fill-current text-funk' : ''} />{saved ? 'Saved to my list' : 'Save for later'}</button>
             <button type="button" onClick={onClose} className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-4 py-3 text-xs font-semibold text-white/70 transition hover:border-white/25 hover:text-white">Keep exploring <ArrowRight size={13} /></button>
@@ -451,7 +453,7 @@ function CollectionPage({ section, search, savedIds, onSave, onOpen, onNavigate 
           </div>
         )}
         <section className="mt-12 grid gap-3 rounded-2xl border border-white/[0.08] bg-[linear-gradient(105deg,#17131a,#11131a_60%,#161119)] p-5 sm:grid-cols-[1fr_auto] sm:items-center sm:p-6">
-          <div className="flex items-start gap-3.5"><span className="archive-index-mark grid size-9 shrink-0 place-items-center rounded-xl border border-funk/20 bg-funk/10 text-funk" aria-hidden="true">D.</span><div><h3 className="text-sm font-semibold text-white">A little context goes a long way.</h3><p className="mt-1 text-xs leading-5 text-white/45">Open an entry for image notes, a closer look, and a way to save it.</p></div></div>
+          <div className="flex items-start gap-3.5"><span className="archive-index-mark grid size-9 shrink-0 place-items-center rounded-xl border border-funk/20 bg-funk/10 text-funk" aria-hidden="true">M.</span><div><h3 className="text-sm font-semibold text-white">A little context goes a long way.</h3><p className="mt-1 text-xs leading-5 text-white/45">Open an entry for image notes, a closer look, and a way to save it.</p></div></div>
           <a href={githubRepo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 justify-self-start rounded-lg border border-white/10 px-3 py-2 text-[10px] font-semibold text-white/65 transition hover:border-funk/40 hover:text-white sm:justify-self-auto"><Code2 size={13} /> Source & credits <ArrowUpRight size={11} /></a>
         </section>
       </main>
@@ -473,7 +475,7 @@ function Footer({ active, onNavigate }) {
       </div>
       <div className="border-t border-white/[0.06]">
         <div className="mx-auto flex max-w-[1440px] flex-col gap-3 px-5 py-4 text-[10px] text-white/30 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-10">
-          <span>© 2026 Discoveries · Made by Mahlatse Lesley Seema</span>
+          <span>© 2026 MovieFunk · Made by Mahlatse Lesley Seema</span>
           <div className="flex flex-wrap gap-x-4 gap-y-2"><a href={githubProfile} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 transition hover:text-white"><Github size={12} /> Owner · Mahles63</a><a href={githubRepo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 transition hover:text-white">Project source <ArrowUpRight size={11} /></a><span>Artwork belongs to its respective owners.</span></div>
         </div>
       </div>
@@ -481,7 +483,7 @@ function Footer({ active, onNavigate }) {
   )
 }
 
-export default function App() {
+function MovieFunkApp() {
   const [active, setActive] = useState(() => sectionFromPath(window.location.pathname))
   const [search, setSearch] = useState('')
   const [savedIds, setSavedIds] = useState(() => JSON.parse(localStorage.getItem('moviefunk-list') ?? '[]'))
@@ -541,4 +543,20 @@ export default function App() {
       <DetailDialog item={selectedItem} items={selectedItems} saved={selectedItem ? savedIds.includes(selectedItem.id) : false} onSave={toggleSaved} onClose={() => setSelectedItem(null)} onNavigate={setSelectedItem} />
     </div>
   )
+}
+
+export default function App() {
+  const [pathname, setPathname] = useState(() => window.location.pathname)
+
+  useEffect(() => {
+    const syncPathname = () => setPathname(window.location.pathname)
+    window.addEventListener('popstate', syncPathname)
+    return () => window.removeEventListener('popstate', syncPathname)
+  }, [])
+
+  useEffect(() => {
+    document.title = pathname === '/' ? 'VeriTech — Selected work' : 'MovieFunk — A considered collection'
+  }, [pathname])
+
+  return pathname === '/' ? <ProjectHome /> : <MovieFunkApp />
 }
